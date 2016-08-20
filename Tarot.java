@@ -7,4 +7,7 @@ public class Tarot{
   Writer.say(input);
   //why doesnt this work?
 };
+
+  private static Tarot reading = new Tarot();
+  public static void main(String args[]){ reading.run(); }
 };
