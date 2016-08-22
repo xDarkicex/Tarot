@@ -31,8 +31,8 @@ public class Tarot{
 
   }
   public void start() {
-    int seed = 0;
-    Writer.say("Ayy lmao");
+    int seed = (name_value + age_value + gender_value) / age;
+    Writer.say(seed);
     deck = new Deck(seed);
     String[] titles = new String[]{"Hear Me", "Help Me", "Hold Me"};
     while(true){
