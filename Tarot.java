@@ -57,10 +57,16 @@ public class Tarot{
         break;
     }
   }
-
+  public static void clear_screen() {  
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
+     }
   private static Tarot reading = new Tarot();
   public static void main(String args[]){
     reading.init();
+    Writer.say("Dicks");
+    Tarot.clear_screen();
+
   }
 
 }

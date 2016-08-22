@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Arrays;
 public class Deck {
   public enum Card{
     //Main Arcaina
@@ -29,15 +32,15 @@ public class Deck {
     FOUROFWANDS("Four of Wands", "When you act upon a shared vision it will have far reaching effects.", "Your enthusiasm empowers your vision, which is thriving with possibilities. As you share more freely what is on your mind and in your heart, others will see themselves in your vision, so you naturally receive approval, support, assistance and abundance. In your own way, you are addressing a universal need."),
     FIVEOFWANDS("Five of Wands", "Let your focus be on advancing your cause.", "Identify what energizes you, what you would fight for and what you are passionate about -- even when you're tired or discouraged. Strive to make that the centerpiece of your mission. This is how you find your livelihood and establish your path of service."),
     SIXOFWANDS("Six of Wands", "Your enthusiastic stewardship is producing dramatic results.", "You may find yourself becoming something of a leader. Usually the first person to break away from conventional thought is the one to define a new trend. Under the circumstances, there is a solid need for a fresh voice and vision -- so make your move. Those around you who are ready for change will support your leadership."),
-    SEVENOFWANDS("Seven of WAnds", "A positive attitude and strong potential will prime you to achieve your personal best.", "Even if slightly unprepared, you may want to push yourself beyond your usual limits, thinking in larger terms and tweaking your competitive nature. Time and effort spent in preparation could pay off handsomely. You might be the one who vaults right over the heads of those who thought they could outdo you. Move beyond rhetoric and verbal challenges. Now could be the moment to prove what puts you head and shoulders above the rest by demonstrating it in action."),
+    SEVENOFWANDS("Seven of Wands", "A positive attitude and strong potential will prime you to achieve your personal best.", "Even if slightly unprepared, you may want to push yourself beyond your usual limits, thinking in larger terms and tweaking your competitive nature. Time and effort spent in preparation could pay off handsomely. You might be the one who vaults right over the heads of those who thought they could outdo you. Move beyond rhetoric and verbal challenges. Now could be the moment to prove what puts you head and shoulders above the rest by demonstrating it in action."),
     EIGHTOFWANDS("Eight of Wands", "Accelerating growth challenges you to keep up with what you are creating in your life.", "Even if you had to leave it all behind, you know you could start all over among total strangers and succeed once again. This valuable self-confidence makes you free to strike out in new directions and not just cling to past successes and previous accomplishments."),
     NINEOFWANDS("Nine of Wands", "Find someone who can fill in for you and take time to refresh your energy.", "There is nothing more to bring to the mission unless you regenerate and restore the energy you have put into the cause. While it is praiseworthy to give all you have for something or someone that means a lot to you, masochism and martyrdom are ill advised. Take a break. No one can fault you for it now."),
     TENOFWANDS("Ten of Wands", "You are beginning to realize that what you have been pursuing is actually internal.", " Now may be the time to reach deep into yourself and identify your purest, most wholesome impulses. As you do this, allow your optimistic and honorable side to see what's good about the world. Look beyond the challenges, setbacks, disappointments and frustrations you tend to see so easily. As you reawaken your high minded inner child, you will refresh your daily life with a joyful purpose."),
     PAGEOFWANDS("Page of Wands", "You are an agent of innovation and change.", "Think of yourself as a secret agent for the greater good. In due time, others may recognize the role you play in the transformation from divisiveness to unity. However, right now you are being asked to watch quietly from the sidelines."),
     KNIGHTOFWANDS("Knight of Wands", "A new journey of discovery is about to be embarked upon.", "Not only can you get a clear sense of the proper path, but you will also have enough instructions to be self-directing. Necessary skills and resources are available to you, and the time is right for you to act. Once you get started, you may be surprised how easy it can feel, but don't be seduced by that feeling. There will be comfortable stretches of the road and there will be distinctly uncomfortable ones. Know that any form of motion is better than no motion."),
     QUEENOFWANDS("Queen of Wands", "Decisiveness and a willingness to lead produce tangible rewards.", "A perceived deficiency in leadership may make you want to take hold of the reins, but don't do it! Restrain yourself and remain loyal to your higher-ups. Stay focused and energetic. Enthusiastically confront the challenges directly in front of you. Perform in good faith and encourage others to do the same."),
-    KINGOFWANDS("King of Wands", "Stay balanced and use power wisely to set a good example.", "You are the determining factor in this situation and circumstances will proceed in the direction that you steer them. Indecision or doubt are not appropriate responses when clarity and confidence are critical. As you take on a bigger role, it will begin to feel more comfortable. Seize the opportunity to influence events, because everything is waiting for you.");
-    // ("", "", ""),
+    KINGOFWANDS("King of Wands", "Stay balanced and use power wisely to set a good example.", "You are the determining factor in this situation and circumstances will proceed in the direction that you steer them. Indecision or doubt are not appropriate responses when clarity and confidence are critical. As you take on a bigger role, it will begin to feel more comfortable. Seize the opportunity to influence events, because everything is waiting for you."),
+    ACEOFCUPS("Ace of Cups", "A fountain of abundance nourishes your life.", "Look with the eye of a loving parent or companion upon the people and things you come into contact with."+"\n"+"Make a conscious decision to approve of and delight in even the quirky developments that make the world turn. No one can be perfect at such unconditional acceptance. Still the practice will sweeten your day to day life. Your magnetism will increase and more loving people may enter your life. The whole world will benefit as this becomes second nature to you.");
     // ("", "", ""),
     // ("", "", ""),
     // ("", "", "");
@@ -88,11 +91,15 @@ public class Deck {
     Card.PAGEOFWANDS,
     Card.KNIGHTOFWANDS,
   };
+  private ArrayList<Card> current_deck;
   private int seed;
   Deck(int seed) {
+    current_deck = new ArrayList<Card>(Arrays.asList(deck));
+    Collections.shuffle(current_deck);
     this.seed = seed;
   }
   public Card draw() {
-    return deck[(int)(Math.random()*deck.length)];
+    return current_deck.remove(0);
+    // return deck[(int)(Math.random()*deck.length)];
   }
 }
