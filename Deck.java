@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Arrays;
+import java.util.Random;
 public class Deck {
   public enum Card{
     //Main Arcaina
@@ -40,8 +41,8 @@ public class Deck {
     KNIGHTOFWANDS("Knight of Wands", "A new journey of discovery is about to be embarked upon.", "Not only can you get a clear sense of the proper path, but you will also have enough instructions to be self-directing. Necessary skills and resources are available to you, and the time is right for you to act. Once you get started, you may be surprised how easy it can feel, but don't be seduced by that feeling. There will be comfortable stretches of the road and there will be distinctly uncomfortable ones. Know that any form of motion is better than no motion."),
     QUEENOFWANDS("Queen of Wands", "Decisiveness and a willingness to lead produce tangible rewards.", "A perceived deficiency in leadership may make you want to take hold of the reins, but don't do it! Restrain yourself and remain loyal to your higher-ups. Stay focused and energetic. Enthusiastically confront the challenges directly in front of you. Perform in good faith and encourage others to do the same."),
     KINGOFWANDS("King of Wands", "Stay balanced and use power wisely to set a good example.", "You are the determining factor in this situation and circumstances will proceed in the direction that you steer them. Indecision or doubt are not appropriate responses when clarity and confidence are critical. As you take on a bigger role, it will begin to feel more comfortable. Seize the opportunity to influence events, because everything is waiting for you."),
-    ACEOFCUPS("Ace of Cups", "A fountain of abundance nourishes your life.", "Look with the eye of a loving parent or companion upon the people and things you come into contact with."+"\n"+"Make a conscious decision to approve of and delight in even the quirky developments that make the world turn. No one can be perfect at such unconditional acceptance. Still the practice will sweeten your day to day life. Your magnetism will increase and more loving people may enter your life. The whole world will benefit as this becomes second nature to you.");
-    // ("", "", ""),
+    ACEOFCUPS("Ace of Cups", "A fountain of abundance nourishes your life.", "Look with the eye of a loving parent or companion upon the people and things you come into contact with.\nMake a conscious decision to approve of and delight in even the quirky developments that make the world turn. No one can be perfect at such unconditional acceptance. Still the practice will sweeten your day to day life. Your magnetism will increase and more loving people may enter your life. The whole world will benefit as this becomes second nature to you."),
+    TWOOFCUPS("Two of Cups", "Your emotional, psychic and spiritual lives are quickening like spring.", "");
     // ("", "", ""),
     // ("", "", "");
     String name;
@@ -51,6 +52,12 @@ public class Deck {
       this.name = name;
       this.intro = intro;
       this.description = description;
+    }
+    public void write() {
+      Writer.cyan(name);
+      Writer.blue(intro);
+      Writer.say(description);
+
     }
     public String toString() { return name+"\n"+intro+"\n"+description; }
   }
@@ -92,11 +99,11 @@ public class Deck {
     Card.KNIGHTOFWANDS,
   };
   private ArrayList<Card> current_deck;
-  private int seed;
+  private Random rng;
   Deck(int seed) {
     current_deck = new ArrayList<Card>(Arrays.asList(deck));
-    Collections.shuffle(current_deck);
-    this.seed = seed;
+    rng = new Random(seed);
+    Collections.shuffle(current_deck, rng);
   }
   public Card draw() {
     return current_deck.remove(0);
