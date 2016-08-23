@@ -1,5 +1,7 @@
 import java.io.Console;
-
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.Date;
 public class Tarot{
   private Console console = System.console();
   String name;
@@ -12,7 +14,7 @@ public class Tarot{
   public void init(){
     Writer.say("What is your name?");
     name = console.readLine();
-    name_value = (int)(1.5 + 100.00 * Math.random());
+    name_value = (int)(1.5 + (double)name.toCharArray().length);
     // converts age input into int
     while(true) {
       Writer.say("What is your age?");
@@ -23,17 +25,17 @@ public class Tarot{
         break;
       } catch(NumberFormatException e) { Writer.red("Invalid input, enter an integer."); }
     }
-    age_value = (int)((double)name_value + 100.00 * Math.random());
+    age_value = (int)((double)name_value + 100.00);
     Writer.say("What is your Gender");
     String[] genders = new String[]{"Male", "Female"};
     int choice = Interaction.choose(genders);
     gender = genders[choice-1];
-    gender_value = (int)((double)age_value + (double)name_value + choice * Math.random());
+    gender_value = (int)((double)age_value + (double)name_value + choice);
     confirm();
 
   }
   public void start() {
-    int seed = (name_value + age_value + gender_value) / age;
+    int seed = (name_value + age_value + gender_value + Calendar.getInstance(TimeZone.getDefault()).get(Calendar.DAY_OF_YEAR)) / age;
     deck = new Deck(seed);
     String[][] titles = new String[][]{{"Hear Me",Writer.ANSI_RED}, {"Help Me",Writer.ANSI_PURPLE}, {"Hold Me",Writer.ANSI_CYAN}};
     while(true){
